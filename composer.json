@@ -14,15 +14,17 @@
     ],
     "require": {
         "php": ">=5.3.3",
-        "beberlei/assert": "dev-master",
+        "beberlei/assert": "dev-master"
     },
     "require-dev": {
-        "phpunit/phpunit": "4.6.*"
+        "phpunit/phpunit": "4.6.*",
+        "mockery/mockery": "~0.9",
+        "doctrine/data-fixtures": "~1.0"
     },
     "config": {
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-4": {"ValueObjects\\": "src"}
+        "psr-4": {"ValueObjects\\": ["src", "tests/Unit"]}
     }
 }
