@@ -11,46 +11,46 @@ namespace ValueObjects\String;
 use ValueObjects\InvalidArgumentException;
 
 /**
- * Class StringTest.
+ * Class StrTest.
  *
  * @package ValueObjects
  * @author  Lorenzo Marzullo <marzullo.lorenzo@gmail.com>
  * @link    http://github.com/lorenzomar/valueobjects
  */
-class StringTest extends \PHPUnit_Framework_TestCase
+class StrTest extends \PHPUnit_Framework_TestCase
 {
     public function testValidConstructor()
     {
         $value = 'test';
-        $string = new String($value);
-        $this->assertInstanceOf(String::class, $string);
+        $string = new Str($value);
+        $this->assertInstanceOf(Str::class, $string);
     }
 
     public function testInvalidConstructor()
     {
         $this->setExpectedException(InvalidArgumentException::class);
-        new String(1);
+        new Str(1);
     }
 
     public function testGetValue()
     {
         // Empty value
         $value = '';
-        $string = new String($value);
+        $string = new Str($value);
         $this->assertEmpty($string->getValue());
         $this->assertSame($value, $string->getValue());
 
         // Not empty value
         $value = 'test';
-        $string = new String($value);
+        $string = new Str($value);
         $this->assertSame($value, $string->getValue());
     }
 
     public function testSameValueAs()
     {
-        $string1 = new String('foo');
-        $string2 = new String('foo');
-        $string3 = new String('bar');
+        $string1 = new Str('foo');
+        $string2 = new Str('foo');
+        $string3 = new Str('bar');
 
         $this->assertTrue($string1->sameValueAs($string2));
         $this->assertFalse($string1->sameValueAs($string3));
@@ -63,7 +63,7 @@ class StringTest extends \PHPUnit_Framework_TestCase
     public function testCopy()
     {
         $value = 'test';
-        $string = new String($value);
+        $string = new Str($value);
         $string2 = $string->copy();
 
         $this->assertNotSame($string, $string2);
@@ -72,10 +72,10 @@ class StringTest extends \PHPUnit_Framework_TestCase
 
     public function testIsEmpty()
     {
-        $string = new String('');
+        $string = new Str('');
         $this->assertTrue($string->isEmpty());
 
-        $string = new String('test');
+        $string = new Str('test');
         $this->assertFalse($string->isEmpty());
     }
 }

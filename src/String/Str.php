@@ -13,13 +13,13 @@ use Assert\InvalidArgumentException;
 use ValueObjects\ValueObjectInterface;
 
 /**
- * Class String.
+ * Class Str.
  *
  * @package ValueObjects
  * @author  Lorenzo Marzullo <marzullo.lorenzo@gmail.com>
  * @link    http://github.com/lorenzomar/valueobjects
  */
-class String implements ValueObjectInterface
+class Str implements ValueObjectInterface
 {
     /**
      * @var string
