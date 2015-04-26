@@ -19,50 +19,53 @@ use ValueObjects\InvalidArgumentException;
  */
 class RealTest extends \PHPUnit_Framework_TestCase
 {
-    public function testConstrucWithVariousNumericValues()
+    public function testNegativeConstructor()
     {
-        // negative
-        $real  = new Real(-1);
+        $real = new Real(-1);
         $this->assertInstanceOf(Real::class, $real);
         $this->assertSame(-1.0, $real->getValue());
 
-        // Zero
-        $real  = new Real(0);
-        $this->assertInstanceOf(Real::class, $real);
-        $this->assertSame(0.0, $real->getValue());
-
-        // positive
-        $real  = new Real(1);
-        $this->assertInstanceOf(Real::class, $real);
-        $this->assertSame(1.0, $real->getValue());
-
-        // negative float
-        $real  = new Real(-1.1);
+        $real = new Real(-1.1);
         $this->assertInstanceOf(Real::class, $real);
         $this->assertSame(-1.1, $real->getValue());
+    }
 
-        // positive float
-        $real  = new Real(1.1);
+    public function testZeroConstructor()
+    {
+        $real = new Real(0);
         $this->assertInstanceOf(Real::class, $real);
-        $this->assertSame(1.1, $real->getValue());
+        $this->assertSame(0.0, $real->getValue());
+    }
 
-        // positive numeric string
-        $real  = new Real('1');
+    public function testPositiveConstructor()
+    {
+        $real = new Real(1);
         $this->assertInstanceOf(Real::class, $real);
         $this->assertSame(1.0, $real->getValue());
 
-        // positive float numeric string
-        $real  = new Real('1.1');
+        $real = new Real(1.1);
         $this->assertInstanceOf(Real::class, $real);
         $this->assertSame(1.1, $real->getValue());
+    }
 
-        // negative numeric string
-        $real  = new Real('-1');
+    public function testPositiveNumericStringConstructor()
+    {
+        $real = new Real('1');
+        $this->assertInstanceOf(Real::class, $real);
+        $this->assertSame(1.0, $real->getValue());
+
+        $real = new Real('1.1');
+        $this->assertInstanceOf(Real::class, $real);
+        $this->assertSame(1.1, $real->getValue());
+    }
+
+    public function testNegativeNumericStringConstructor()
+    {
+        $real = new Real('-1');
         $this->assertInstanceOf(Real::class, $real);
         $this->assertSame(-1.0, $real->getValue());
 
-        // negative float numeric string
-        $real  = new Real('-1.1');
+        $real = new Real('-1.1');
         $this->assertInstanceOf(Real::class, $real);
         $this->assertSame(-1.1, $real->getValue());
     }
@@ -90,27 +93,35 @@ class RealTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($real2->sameValueAs($real4));
     }
 
-    public function testToInteger()
+    public function testToIntegerHalfDown()
     {
-        $real = new Real(3.5);
-
-        // Half down
-        $integer = new Integer(3);
-        $rounding = RoundingMode::HALF_DOWN();
-        $this->assertTrue($integer->sameValueAs($real->toInteger($rounding)));
-
-        // Half up
-        $integer = new Integer(4);
-        $rounding = RoundingMode::HALF_UP();
-        $this->assertTrue($integer->sameValueAs($real->toInteger($rounding)));
-
-        // @TODO even e odd (non so cosa si intenda)
+        $real    = new Real(3.5);
+        $integer = $real->toInteger(RoundingMode::HALF_DOWN());
+        $this->assertInstanceOf(Integer::class, $integer);
+        $this->assertSame(3, $integer->getValue());
     }
 
-    public function testToNatural()
+    public function testToIntegerHalfUp()
     {
-        // $real = new Real(3.5);
+        $real    = new Real(3.5);
+        $integer = $real->toInteger(RoundingMode::HALF_UP());
+        $this->assertInstanceOf(Integer::class, $integer);
+        $this->assertSame(4, $integer->getValue());
+    }
 
-        // var_dump($real->toNatural());
+    public function testNegativeToNaturalHalfDown()
+    {
+        $real    = new Real(-0.5);
+        $natural = $real->toNatural(RoundingMode::HALF_DOWN());
+        $this->assertInstanceOf(Natural::class, $natural);
+        $this->assertSame(0, $natural->getValue());
+    }
+
+    public function testNegativeToNaturalHalfUp()
+    {
+        $real    = new Real(-0.5);
+        $natural = $real->toNatural(RoundingMode::HALF_UP());
+        $this->assertInstanceOf(Natural::class, $natural);
+        $this->assertSame(1, $natural->getValue());
     }
 }
