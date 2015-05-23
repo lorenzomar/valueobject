@@ -1,19 +1,19 @@
 <?php
 
 /**
- * This file is part of the ValueObjects package.
+ * This file is part of the ValueObject package.
  *
  * (c) Lorenzo Marzullo <marzullo.lorenzo@gmail.com>
  */
 
-namespace ValueObjects\String;
+namespace ValueObject\String;
 
-use ValueObjects\InvalidArgumentException;
+use ValueObject\InvalidArgumentException;
 
 /**
  * Class StrTest.
  *
- * @package ValueObjects
+ * @package ValueObject
  * @author  Lorenzo Marzullo <marzullo.lorenzo@gmail.com>
  * @link    http://github.com/lorenzomar/valueobjects
  */
@@ -32,18 +32,18 @@ class StrTest extends \PHPUnit_Framework_TestCase
         new Str(1);
     }
 
-    public function testGetValue()
+    public function testValue()
     {
         // Empty value
         $value = '';
         $string = new Str($value);
-        $this->assertEmpty($string->getValue());
-        $this->assertSame($value, $string->getValue());
+        $this->assertEmpty($string->value());
+        $this->assertSame($value, $string->value());
 
         // Not empty value
         $value = 'test';
         $string = new Str($value);
-        $this->assertSame($value, $string->getValue());
+        $this->assertSame($value, $string->value());
     }
 
     public function testSameValueAs()

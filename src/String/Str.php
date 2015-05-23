@@ -1,25 +1,27 @@
 <?php
 
 /**
- * This file is part of the ValueObjects package.
+ * This file is part of the ValueObject package.
  *
  * (c) Lorenzo Marzullo <marzullo.lorenzo@gmail.com>
  */
 
-namespace ValueObjects\String;
+namespace ValueObject\String;
 
 use Assert\Assertion;
-use Assert\InvalidArgumentException;
-use ValueObjects\ValueObjectInterface;
+use Assert\InvalidArgumentException as AssertionInvalidArgumentException;
+use ValueObject\InvalidArgumentException;
+use ValueObject\SimpleValueObjectInterface;
+use ValueObject\ValueObjectInterface;
 
 /**
  * Class Str.
  *
- * @package ValueObjects
+ * @package ValueObject
  * @author  Lorenzo Marzullo <marzullo.lorenzo@gmail.com>
  * @link    http://github.com/lorenzomar/valueobjects
  */
-class Str implements ValueObjectInterface
+class Str implements SimpleValueObjectInterface
 {
     /**
      * @var string
@@ -32,9 +34,14 @@ class Str implements ValueObjectInterface
             Assertion::string($value);
 
             $this->value = $value;
-        } catch (InvalidArgumentException $exception) {
-            throw new \ValueObjects\InvalidArgumentException($value, array('string'));
+        } catch (AssertionInvalidArgumentException $exception) {
+            throw new InvalidArgumentException($value, array('string'));
         }
+    }
+
+    public function value()
+    {
+        return $this->__toString();
     }
 
     public function sameValueAs(ValueObjectInterface $valueObject)
@@ -48,16 +55,6 @@ class Str implements ValueObjectInterface
     }
 
     /**
-     * getValue.
-     *
-     * @return string
-     */
-    public function getValue()
-    {
-        return $this->__toString();
-    }
-
-    /**
      * isEmpty.
      *
      * @return bool
@@ -68,7 +65,7 @@ class Str implements ValueObjectInterface
             Assertion::length($this->value, 0);
 
             return true;
-        } catch (InvalidArgumentException $exception) {
+        } catch (AssertionInvalidArgumentException $exception) {
             return false;
         }
     }
