@@ -1,20 +1,22 @@
 <?php
 
 /**
- * This file is part of the ValueObjects package.
+ * This file is part of the ValueObject package.
  *
  * (c) Lorenzo Marzullo <marzullo.lorenzo@gmail.com>
  */
 
-namespace ValueObjects\Number;
+namespace ValueObject\Number;
 
 use Assert\Assertion;
-use Assert\InvalidArgumentException;
+use Assert\AssertionChain;
+use Assert\InvalidArgumentException as AssertionInvalidArgumentException;
+use ValueObject\InvalidArgumentException;
 
 /**
  * Class Natural.
  *
- * @package ValueObjects
+ * @package ValueObject
  * @author  Lorenzo Marzullo <marzullo.lorenzo@gmail.com>
  * @link    http://github.com/lorenzomar/valueobjects
  */
@@ -23,11 +25,11 @@ class Natural extends Integer
     public function __construct($value)
     {
         try {
-            Assertion::min($value, 0);
+            \Assert\that($value)->integerish()->min(0);
 
-            parent::__construct($value);
-        } catch (InvalidArgumentException $exception) {
-            throw new \ValueObjects\InvalidArgumentException($value, array('natural'));
+            $this->value = (int) $value;
+        } catch (AssertionInvalidArgumentException $exception) {
+            throw new InvalidArgumentException($value, array('natural'));
         }
     }
 }

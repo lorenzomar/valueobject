@@ -1,20 +1,21 @@
 <?php
 
 /**
- * This file is part of the ValueObjects package.
+ * This file is part of the ValueObject package.
  *
  * (c) Lorenzo Marzullo <marzullo.lorenzo@gmail.com>
  */
 
-namespace ValueObjects\Number;
+namespace ValueObject\Number;
 
 use Assert\Assertion;
-use Assert\InvalidArgumentException;
+use Assert\InvalidArgumentException as AssertionInvalidArgumentException;
+use ValueObject\InvalidArgumentException;
 
 /**
  * Class Integer.
  *
- * @package ValueObjects
+ * @package ValueObject
  * @author  Lorenzo Marzullo <marzullo.lorenzo@gmail.com>
  * @link    http://github.com/lorenzomar/valueobjects
  */
@@ -25,16 +26,9 @@ class Integer extends Real
         try {
             Assertion::integerish($value);
 
-            parent::__construct($value);
-        } catch (InvalidArgumentException $exception) {
-            throw new \ValueObjects\InvalidArgumentException($value, array('integer'));
+            $this->value = (int) $value;
+        } catch (AssertionInvalidArgumentException $exception) {
+            throw new InvalidArgumentException($value, array('integer'));
         }
-    }
-
-    public function getValue()
-    {
-        $value = parent::getValue();
-
-        return \intval($value);
     }
 }

@@ -1,19 +1,19 @@
 <?php
 
 /**
- * This file is part of the ValueObjects package.
+ * This file is part of the ValueObject package.
  *
  * (c) Lorenzo Marzullo <marzullo.lorenzo@gmail.com>
  */
 
-namespace ValueObjects\Number;
+namespace ValueObject\Number;
 
-use ValueObjects\Enum\AbstractEnum;
+use ValueObject\Enum\AbstractEnum;
 
 /**
  * Class RoundingMode.
  *
- * @package ValueObjects
+ * @package ValueObject
  * @author  Lorenzo Marzullo <marzullo.lorenzo@gmail.com>
  * @link    http://github.com/lorenzomar/valueobjects
  *

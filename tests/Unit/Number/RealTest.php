@@ -1,19 +1,19 @@
 <?php
 
 /**
- * This file is part of the ValueObjects package.
+ * This file is part of the ValueObject package.
  *
  * (c) Lorenzo Marzullo <marzullo.lorenzo@gmail.com>
  */
 
-namespace ValueObjects\Number;
+namespace ValueObject\Number;
 
-use ValueObjects\InvalidArgumentException;
+use ValueObject\InvalidArgumentException;
 
 /**
  * Class RealTest.
  *
- * @package ValueObjects
+ * @package ValueObject
  * @author  Lorenzo Marzullo <marzullo.lorenzo@gmail.com>
  * @link    http://github.com/lorenzomar/valueobjects
  */
@@ -23,51 +23,51 @@ class RealTest extends \PHPUnit_Framework_TestCase
     {
         $real = new Real(-1);
         $this->assertInstanceOf(Real::class, $real);
-        $this->assertSame(-1.0, $real->getValue());
+        $this->assertSame(-1.0, $real->value());
 
         $real = new Real(-1.1);
         $this->assertInstanceOf(Real::class, $real);
-        $this->assertSame(-1.1, $real->getValue());
+        $this->assertSame(-1.1, $real->value());
     }
 
     public function testZeroConstructor()
     {
         $real = new Real(0);
         $this->assertInstanceOf(Real::class, $real);
-        $this->assertSame(0.0, $real->getValue());
+        $this->assertSame(0.0, $real->value());
     }
 
     public function testPositiveConstructor()
     {
         $real = new Real(1);
         $this->assertInstanceOf(Real::class, $real);
-        $this->assertSame(1.0, $real->getValue());
+        $this->assertSame(1.0, $real->value());
 
         $real = new Real(1.1);
         $this->assertInstanceOf(Real::class, $real);
-        $this->assertSame(1.1, $real->getValue());
+        $this->assertSame(1.1, $real->value());
     }
 
     public function testPositiveNumericStringConstructor()
     {
         $real = new Real('1');
         $this->assertInstanceOf(Real::class, $real);
-        $this->assertSame(1.0, $real->getValue());
+        $this->assertSame(1.0, $real->value());
 
         $real = new Real('1.1');
         $this->assertInstanceOf(Real::class, $real);
-        $this->assertSame(1.1, $real->getValue());
+        $this->assertSame(1.1, $real->value());
     }
 
     public function testNegativeNumericStringConstructor()
     {
         $real = new Real('-1');
         $this->assertInstanceOf(Real::class, $real);
-        $this->assertSame(-1.0, $real->getValue());
+        $this->assertSame(-1.0, $real->value());
 
         $real = new Real('-1.1');
         $this->assertInstanceOf(Real::class, $real);
-        $this->assertSame(-1.1, $real->getValue());
+        $this->assertSame(-1.1, $real->value());
     }
 
     public function testInvalidConstruct()
@@ -98,7 +98,7 @@ class RealTest extends \PHPUnit_Framework_TestCase
         $real    = new Real(3.5);
         $integer = $real->toInteger(RoundingMode::HALF_DOWN());
         $this->assertInstanceOf(Integer::class, $integer);
-        $this->assertSame(3, $integer->getValue());
+        $this->assertSame(3, $integer->value());
     }
 
     public function testToIntegerHalfUp()
@@ -106,7 +106,7 @@ class RealTest extends \PHPUnit_Framework_TestCase
         $real    = new Real(3.5);
         $integer = $real->toInteger(RoundingMode::HALF_UP());
         $this->assertInstanceOf(Integer::class, $integer);
-        $this->assertSame(4, $integer->getValue());
+        $this->assertSame(4, $integer->value());
     }
 
     public function testNegativeToNaturalHalfDown()
@@ -114,7 +114,7 @@ class RealTest extends \PHPUnit_Framework_TestCase
         $real    = new Real(-0.5);
         $natural = $real->toNatural(RoundingMode::HALF_DOWN());
         $this->assertInstanceOf(Natural::class, $natural);
-        $this->assertSame(0, $natural->getValue());
+        $this->assertSame(0, $natural->value());
     }
 
     public function testNegativeToNaturalHalfUp()
@@ -122,6 +122,6 @@ class RealTest extends \PHPUnit_Framework_TestCase
         $real    = new Real(-0.5);
         $natural = $real->toNatural(RoundingMode::HALF_UP());
         $this->assertInstanceOf(Natural::class, $natural);
-        $this->assertSame(1, $natural->getValue());
+        $this->assertSame(1, $natural->value());
     }
 }

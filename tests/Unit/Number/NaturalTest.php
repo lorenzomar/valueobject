@@ -1,19 +1,19 @@
 <?php
 
 /**
- * This file is part of the ValueObjects package.
+ * This file is part of the ValueObject package.
  *
  * (c) Lorenzo Marzullo <marzullo.lorenzo@gmail.com>
  */
 
-namespace ValueObjects\Number;
+namespace ValueObject\Number;
 
-use ValueObjects\InvalidArgumentException;
+use ValueObject\InvalidArgumentException;
 
 /**
  * Class NaturalTest.
  *
- * @package ValueObjects
+ * @package ValueObject
  * @author  Lorenzo Marzullo <marzullo.lorenzo@gmail.com>
  * @link    http://github.com/lorenzomar/valueobjects
  */
@@ -35,21 +35,21 @@ class NaturalTest extends \PHPUnit_Framework_TestCase
     {
         $natural = new Natural(0);
         $this->assertInstanceOf(Natural::class, $natural);
-        $this->assertSame(0, $natural->getValue());
+        $this->assertSame(0, $natural->value());
     }
 
     public function testPositiveConstructor()
     {
         $natural = new Natural(1);
         $this->assertInstanceOf(Natural::class, $natural);
-        $this->assertSame(1, $natural->getValue());
+        $this->assertSame(1, $natural->value());
     }
 
     public function testPositiveNumericStringConstructor()
     {
         $natural = new Natural('1');
         $this->assertInstanceOf(Natural::class, $natural);
-        $this->assertSame(1, $natural->getValue());
+        $this->assertSame(1, $natural->value());
     }
 
     public function testInvalidConstruct()

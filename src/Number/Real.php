@@ -1,60 +1,35 @@
 <?php
 
 /**
- * This file is part of the ValueObjects package.
+ * This file is part of the ValueObject package.
  *
  * (c) Lorenzo Marzullo <marzullo.lorenzo@gmail.com>
  */
 
-namespace ValueObjects\Number;
+namespace ValueObject\Number;
 
 use Assert\Assertion;
-use Assert\InvalidArgumentException;
-use ValueObjects\ValueObjectInterface;
+use Assert\InvalidArgumentException as AssertionInvalidArgumentException;
+use ValueObject\InvalidArgumentException;
 
 /**
  * Class Real.
  *
- * @package ValueObjects
+ * @package ValueObject
  * @author  Lorenzo Marzullo <marzullo.lorenzo@gmail.com>
  * @link    http://github.com/lorenzomar/valueobjects
  */
-class Real implements ValueObjectInterface
+class Real extends AbstractNumber
 {
-    /**
-     * @var double
-     */
-    protected $value;
-
     public function __construct($value)
     {
         try {
             Assertion::numeric($value);
 
-            $this->value = \filter_var($value, FILTER_VALIDATE_FLOAT);
-        } catch (InvalidArgumentException $exception) {
-            throw new \ValueObjects\InvalidArgumentException($value, array('float'));
+            $this->value = filter_var($value, FILTER_VALIDATE_FLOAT);
+        } catch (AssertionInvalidArgumentException $exception) {
+            throw new InvalidArgumentException($value, array('float'));
         }
-    }
-
-    public function sameValueAs(ValueObjectInterface $valueObject)
-    {
-        return $this == $valueObject;
-    }
-
-    public function copy()
-    {
-        return clone $this;
-    }
-
-    /**
-     * getValue.
-     *
-     * @return double
-     */
-    public function getValue()
-    {
-        return $this->value;
     }
 
     /**
@@ -62,13 +37,14 @@ class Real implements ValueObjectInterface
      *
      * @param RoundingMode $roundingMode
      *
-     * @return \ValueObjects\Number\Integer
+     * @return Integer
      */
     public function toInteger(RoundingMode $roundingMode = null)
     {
         if (null === $roundingMode) {
             $roundingMode = RoundingMode::HALF_UP();
         }
+
         $value = filter_var(round($this->value, 0, $roundingMode->getValue()), FILTER_VALIDATE_INT);
 
         return new Integer($value);
@@ -83,20 +59,20 @@ class Real implements ValueObjectInterface
      */
     public function toNatural(RoundingMode $roundingMode = null)
     {
-        $naturalValue = \abs($this->toInteger($roundingMode)->getValue());
+        $naturalValue = abs($this->toInteger($roundingMode)->value());
         return new Natural($naturalValue);
     }
 
     /**
      * fromInteger.
      *
-     * @param \ValueObjects\Number\Integer $integer
+     * @param Integer $integer
      *
      * @return Real
      */
     public static function fromInteger(Integer $integer)
     {
-        return new self($integer->getValue());
+        return new self($integer->value());
     }
 
     /**
@@ -109,15 +85,5 @@ class Real implements ValueObjectInterface
     public static function fromNatural(Natural $natural)
     {
         return self::fromInteger($natural);
-    }
-
-    public function __clone()
-    {
-        return new static($this->value);
-    }
-
-    public function __toString()
-    {
-        return (string)$this->value;
     }
 }
