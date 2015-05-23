@@ -17,8 +17,7 @@
         "beberlei/assert": "dev-master",
         "myclabs/php-enum": "dev-master",
         "mathiasverraes/money": "dev-master",
-        "ramsey/uuid": "dev-master",
-        "nicolopignatelli/valueobjects": "~2.0"
+        "ramsey/uuid": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "4.6.*",
