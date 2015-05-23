@@ -1,25 +1,31 @@
 <?php
 
 /**
- * This file is part of the ValueObjects package.
+ * This file is part of the ValueObject package.
  *
  * (c) Lorenzo Marzullo <marzullo.lorenzo@gmail.com>
  */
 
-namespace ValueObjects\Enum;
+namespace ValueObject\Enum;
 
 use MyCLabs\Enum\Enum;
-use ValueObjects\ValueObjectInterface;
+use ValueObject\SimpleValueObjectInterface;
+use ValueObject\ValueObjectInterface;
 
 /**
  * Class AbstractEnum.
  *
- * @package ValueObjects
+ * @package ValueObject
  * @author  Lorenzo Marzullo <marzullo.lorenzo@gmail.com>
  * @link    http://github.com/lorenzomar/valueobjects
  */
-abstract class AbstractEnum extends Enum implements ValueObjectInterface
+abstract class AbstractEnum extends Enum implements SimpleValueObjectInterface
 {
+    public function value()
+    {
+        return $this->getValue();
+    }
+
     public function sameValueAs(ValueObjectInterface $valueObject)
     {
         return $this == $valueObject;
@@ -32,6 +38,6 @@ abstract class AbstractEnum extends Enum implements ValueObjectInterface
 
     public function __clone()
     {
-        return new static($this->getValue());
+        return new static($this->value());
     }
 }
