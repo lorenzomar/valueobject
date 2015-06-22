@@ -8,7 +8,7 @@
 
 namespace ValueObject\Number;
 
-use ValueObject\SimpleValueObjectInterface;
+use ValueObject\ScalarValueObjectInterface;
 
 /**
  * Interface NumberInterface.
@@ -17,7 +17,7 @@ use ValueObject\SimpleValueObjectInterface;
  * @author  Lorenzo Marzullo <marzullo.lorenzo@gmail.com>
  * @link    http://github.com/lorenzomar/valueobjects
  */
-interface NumberInterface extends SimpleValueObjectInterface
+interface NumberInterface extends ScalarValueObjectInterface
 {
     /**
      * greaterThan.

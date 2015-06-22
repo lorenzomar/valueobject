@@ -8,7 +8,7 @@
 
 namespace ValueObject\Quantity;
 
-use ValueObject\SimpleValueObjectInterface;
+use ValueObject\ScalarValueObjectInterface;
 
 /**
  * Interface AmountInterface.
@@ -17,7 +17,7 @@ use ValueObject\SimpleValueObjectInterface;
  * @author  Lorenzo Marzullo <marzullo.lorenzo@gmail.com>
  * @link    http://github.com/lorenzomar/valueobjects
  */
-interface AmountInterface extends SimpleValueObjectInterface
+interface AmountInterface extends ScalarValueObjectInterface
 {
 
 }

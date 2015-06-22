@@ -11,7 +11,7 @@ namespace ValueObject\String;
 use Assert\Assertion;
 use Assert\InvalidArgumentException as AssertionInvalidArgumentException;
 use ValueObject\InvalidArgumentException;
-use ValueObject\SimpleValueObjectInterface;
+use ValueObject\ScalarValueObjectInterface;
 use ValueObject\ValueObjectInterface;
 
 /**
@@ -21,7 +21,7 @@ use ValueObject\ValueObjectInterface;
  * @author  Lorenzo Marzullo <marzullo.lorenzo@gmail.com>
  * @link    http://github.com/lorenzomar/valueobjects
  */
-class Str implements SimpleValueObjectInterface
+class Str implements ScalarValueObjectInterface
 {
     /**
      * @var string
