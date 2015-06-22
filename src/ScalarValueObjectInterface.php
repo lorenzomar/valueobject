@@ -9,13 +9,13 @@
 namespace ValueObject;
 
 /**
- * Interface SimpleValueObjectInterface.
+ * Interface ScalarValueObjectInterface.
  *
  * @package ValueObject
  * @author  Lorenzo Marzullo <marzullo.lorenzo@gmail.com>
  * @link    http://github.com/lorenzomar/valueobjects
  */
-interface SimpleValueObjectInterface extends ValueObjectInterface
+interface ScalarValueObjectInterface extends ValueObjectInterface
 {
     /**
      * value.

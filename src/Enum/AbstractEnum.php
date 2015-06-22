@@ -9,7 +9,7 @@
 namespace ValueObject\Enum;
 
 use MyCLabs\Enum\Enum;
-use ValueObject\SimpleValueObjectInterface;
+use ValueObject\ScalarValueObjectInterface;
 use ValueObject\ValueObjectInterface;
 
 /**
@@ -19,7 +19,7 @@ use ValueObject\ValueObjectInterface;
  * @author  Lorenzo Marzullo <marzullo.lorenzo@gmail.com>
  * @link    http://github.com/lorenzomar/valueobjects
  */
-abstract class AbstractEnum extends Enum implements SimpleValueObjectInterface
+abstract class AbstractEnum extends Enum implements ScalarValueObjectInterface
 {
     public function value()
     {
