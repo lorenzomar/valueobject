@@ -255,7 +255,7 @@ class CountryPrefix extends AbstractEnum
     const US  = 1;
     const UY  = 598;
     const UZ  = 998;
-    const VA  = 39-06;
+    const VA  = 379;
     const VC  = 1;
     const VE  = 58;
     const VG  = 1;
