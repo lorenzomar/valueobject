@@ -125,6 +125,11 @@ class Country implements ValueObjectInterface
 
     public function copy()
     {
+        return clone $this;
+    }
+
+    public function __clone()
+    {
         $alpha2 = clone $this->iso31661Alpha2Code;
         $alpha3 = clone $this->iso31661Alpha3Code;
         $name   = clone $this->englishName;
