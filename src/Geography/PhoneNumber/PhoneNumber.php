@@ -62,7 +62,7 @@ class PhoneNumber implements ValueObjectInterface
      */
     public function sameValueAs(ValueObjectInterface $valueObject)
     {
-        return $this->prefix->sameValueAs($valueObject->prefix());
+        return $this->prefix->sameValueAs($valueObject->prefix()) && $this->lineNumber->sameValueAs($valueObject->lineNumber());
     }
 
     public function copy()
