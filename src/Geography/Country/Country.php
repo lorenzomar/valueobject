@@ -67,10 +67,10 @@ class Country implements ValueObjectInterface
 
         $alpha2      = new Iso31661Alpha2Code($data[0]);
         $alpha3      = new Iso31661Alpha3Code($data[1]);
-        $name        = new Str($data[3]);
         $phonePrefix = CountryPrefix::fromIso31661Alpha2Code($alpha2);
+        $name        = new Str($data[3]);
 
-        return new static($alpha2, $alpha3, $name, $phonePrefix);
+        return new static($alpha2, $alpha3, $phonePrefix, $name);
     }
 
     /**
@@ -86,10 +86,10 @@ class Country implements ValueObjectInterface
 
         $alpha2      = new Iso31661Alpha2Code($data[0]);
         $alpha3      = new Iso31661Alpha3Code($data[1]);
-        $name        = new Str($data[3]);
         $phonePrefix = CountryPrefix::fromIso31661Alpha2Code($alpha2);
+        $name        = new Str($data[3]);
 
-        return new static($alpha2, $alpha3, $name, $phonePrefix);
+        return new static($alpha2, $alpha3, $phonePrefix, $name);
     }
 
     /**
@@ -139,7 +139,7 @@ class Country implements ValueObjectInterface
      */
     public function sameValueAs(ValueObjectInterface $valueObject)
     {
-        return $this->iso31661Alpha2Code->sameValueAs($valueObject->iso31661Alpha2Code()) && $this->iso31661Alpha3Code->sameValueAs($valueObject->iso31661Alpha3Code()) && $this->englishName->sameValueAs($valueObject->englishName());
+        return $this->iso31661Alpha2Code->sameValueAs($valueObject->iso31661Alpha2Code()) && $this->iso31661Alpha3Code->sameValueAs($valueObject->iso31661Alpha3Code()) && $this->englishName->sameValueAs($valueObject->englishName()) && $this->phoneNumberPrefix->sameValueAs($valueObject->phoneNumberPrefix);
     }
 
     public function copy()
@@ -154,6 +154,6 @@ class Country implements ValueObjectInterface
         $name   = clone $this->englishName;
         $prefix = clone $this->phoneNumberPrefix;
 
-        return new static($alpha2, $alpha3, $name, $prefix);
+        return new static($alpha2, $alpha3, $prefix, $name);
     }
 }
