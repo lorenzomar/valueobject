@@ -8,6 +8,7 @@
 
 namespace ValueObject\Geography\Country;
 
+use ValueObject\PhoneNumber\CountryPrefix;
 use ValueObject\String\Str;
 use ValueObject\ValueObjectInterface;
 
@@ -36,14 +37,20 @@ class Country implements ValueObjectInterface
     protected $numericCode;
 
     /**
+     * @var CountryPrefix
+     */
+    protected $phoneNumberPrefix;
+
+    /**
      * @var Str
      */
     protected $englishName;
 
-    public function __construct(Iso31661Alpha2Code $iso31661Alpha2Code, Iso31661Alpha3Code $iso31661Alpha3Code, Str $englishName)
+    public function __construct(Iso31661Alpha2Code $iso31661Alpha2Code, Iso31661Alpha3Code $iso31661Alpha3Code, CountryPrefix $phoneNumberPrefix, Str $englishName)
     {
         $this->iso31661Alpha2Code = $iso31661Alpha2Code;
         $this->iso31661Alpha3Code = $iso31661Alpha3Code;
+        $this->phoneNumberPrefix  = $phoneNumberPrefix;
         $this->englishName        = $englishName;
     }
 
@@ -58,11 +65,12 @@ class Country implements ValueObjectInterface
     {
         $data = DataProvider::fromIso31661Alpha2Code($code);
 
-        $alpha2 = new Iso31661Alpha2Code($data[0]);
-        $alpha3 = new Iso31661Alpha3Code($data[1]);
-        $name   = new Str($data[3]);
+        $alpha2      = new Iso31661Alpha2Code($data[0]);
+        $alpha3      = new Iso31661Alpha3Code($data[1]);
+        $name        = new Str($data[3]);
+        $phonePrefix = CountryPrefix::fromIso31661Alpha2Code($alpha2);
 
-        return new static($alpha2, $alpha3, $name);
+        return new static($alpha2, $alpha3, $name, $phonePrefix);
     }
 
     /**
@@ -76,11 +84,12 @@ class Country implements ValueObjectInterface
     {
         $data = DataProvider::fromIso31661Alpha3Code($code);
 
-        $alpha2 = new Iso31661Alpha2Code($data[0]);
-        $alpha3 = new Iso31661Alpha3Code($data[1]);
-        $name   = new Str($data[3]);
+        $alpha2      = new Iso31661Alpha2Code($data[0]);
+        $alpha3      = new Iso31661Alpha3Code($data[1]);
+        $name        = new Str($data[3]);
+        $phonePrefix = CountryPrefix::fromIso31661Alpha2Code($alpha2);
 
-        return new static($alpha2, $alpha3, $name);
+        return new static($alpha2, $alpha3, $name, $phonePrefix);
     }
 
     /**
@@ -114,6 +123,16 @@ class Country implements ValueObjectInterface
     }
 
     /**
+     * PhoneNumberPrefix.
+     *
+     * @return CountryPrefix
+     */
+    public function PhoneNumberPrefix()
+    {
+        return $this->phoneNumberPrefix;
+    }
+
+    /**
      * @inheritdoc.
      *
      * @param static $valueObject
@@ -133,7 +152,8 @@ class Country implements ValueObjectInterface
         $alpha2 = clone $this->iso31661Alpha2Code;
         $alpha3 = clone $this->iso31661Alpha3Code;
         $name   = clone $this->englishName;
+        $prefix = clone $this->phoneNumberPrefix;
 
-        return new static($alpha2, $alpha3, $name);
+        return new static($alpha2, $alpha3, $name, $prefix);
     }
 }

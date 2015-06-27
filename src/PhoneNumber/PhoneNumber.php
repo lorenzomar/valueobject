@@ -6,7 +6,7 @@
  * (c) Lorenzo Marzullo <marzullo.lorenzo@gmail.com>
  */
 
-namespace ValueObject\Geography\PhoneNumber;
+namespace ValueObject\PhoneNumber;
 
 use ValueObject\ValueObjectInterface;
 

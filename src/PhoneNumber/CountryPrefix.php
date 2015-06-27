@@ -6,10 +6,11 @@
  * (c) Lorenzo Marzullo <marzullo.lorenzo@gmail.com>
  */
 
-namespace ValueObject\Geography\PhoneNumber;
+namespace ValueObject\PhoneNumber;
 
 use ValueObject\Enum\AbstractEnum;
 use ValueObject\Geography\Country\Country;
+use ValueObject\Geography\Country\Iso31661Alpha2Code;
 
 /**
  * Class CountryPrefix.
@@ -281,6 +282,18 @@ class CountryPrefix extends AbstractEnum
     {
         $code = $country->iso31661Alpha2Code()->value();
 
+        return static::fromIso31661Alpha2Code($code);
+    }
+
+    /**
+     * fromIso31661Alpha2Code.
+     *
+     * @param Iso31661Alpha2Code $code
+     *
+     * @return static
+     */
+    public static function fromIso31661Alpha2Code(Iso31661Alpha2Code $code)
+    {
         return call_user_func(array(__CLASS__, $code));
     }
 }
